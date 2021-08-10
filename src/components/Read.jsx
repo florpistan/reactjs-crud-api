@@ -8,23 +8,24 @@ export default function Read() {
 
   useEffect(() => {
     axios
-      .get('https://610dc87348beae001747b94b.mockapi.io/api/users')
+      .get('https://610dc87348beae001747b94b.mockapi.io/api/students')
       .then((response) => {
         setApiData(response.data);
       });
   }, []);
 
   const setData = (data) => {
-    let { id, firstName, lastName, checkbox } = data;
+    let { id, firstName, lastName, comision, checkbox } = data;
     localStorage.setItem('ID', id);
     localStorage.setItem('First Name', firstName);
     localStorage.setItem('Last Name', lastName);
+    localStorage.setItem('Comision', comision);
     localStorage.setItem('Checkbox Value', checkbox);
   };
 
   const onDelete = (id) => {
     axios
-      .delete(`https://610dc87348beae001747b94b.mockapi.io/api/users/${id}`)
+      .delete(`https://610dc87348beae001747b94b.mockapi.io/api/students/${id}`)
       .then(() => {
         getData();
       });
@@ -32,7 +33,7 @@ export default function Read() {
 
   const getData = () => {
     axios
-      .get('https://610dc87348beae001747b94b.mockapi.io/api/users')
+      .get('https://610dc87348beae001747b94b.mockapi.io/api/students')
       .then((getData) => {
         setApiData(getData.data);
       });
@@ -44,20 +45,23 @@ export default function Read() {
         <thead>
           <tr>
             <th>#</th>
-            <th>Name</th>
-            <th>Last Name</th>
-            <th>Checked</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Comision</th>
+            <th>PC Propia</th>
             <th>Update</th>
             <th>Delete</th>
           </tr>
         </thead>
         <tbody>
           {ApiData.map((data) => {
+            console.log(data);
             return (
               <Table.Row>
                 <Table.Cell>{data.id}</Table.Cell>
                 <Table.Cell>{data.firstName}</Table.Cell>
                 <Table.Cell>{data.lastName}</Table.Cell>
+                <Table.Cell>{data.comision}</Table.Cell>
                 <Table.Cell>{data.checkbox ? 'Yes' : 'No'}</Table.Cell>
 
                 <Table.Cell>
@@ -66,7 +70,7 @@ export default function Read() {
                       onClick={() => setData(data)}
                       className="ui inverted purple button"
                     >
-                      Uptade
+                      Editar
                     </Button>
                   </Link>
                 </Table.Cell>
@@ -75,7 +79,7 @@ export default function Read() {
                     onClick={() => onDelete(data.id)}
                     className="ui inverted red button"
                   >
-                    Delete
+                    Eliminar
                   </Button>
                 </Table.Cell>
               </Table.Row>

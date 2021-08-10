@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 export default function Update() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [comision, setComision] = useState('');
   const [checkbox, setCheckBox] = useState(false);
   const [id, setId] = useState('null');
 
@@ -15,14 +16,16 @@ export default function Update() {
     setId(localStorage.getItem('ID'));
     setFirstName(localStorage.getItem('First Name'));
     setLastName(localStorage.getItem('Last Name'));
+    setComision(localStorage.getItem('Comision'));
     setCheckBox(localStorage.getItem('Checkbox Value'));
   }, []);
 
   const updateApiData = () => {
     axios
-      .put(`https://610dc87348beae001747b94b.mockapi.io/api/users/${id}`, {
+      .put(`https://610dc87348beae001747b94b.mockapi.io/api/students/${id}`, {
         firstName,
         lastName,
+        comision,
         checkbox,
       })
       .then(() => {
@@ -34,19 +37,27 @@ export default function Update() {
     <div>
       <Form className="create-form">
         <Form.Field>
-          <label>First Name</label>
+          <label>Nombre</label>
           <input
-            placeholder="First Name"
+            placeholder="Nombre"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           />
         </Form.Field>
         <Form.Field>
-          <label>Last Name</label>
+          <label>Apellido</label>
           <input
-            placeholder="Last Name"
+            placeholder="Apellido"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label>Comisión:</label>
+          <input
+            placeholder="Comision"
+            value={comision}
+            onChange={(e) => setComision(e.target.value)}
           />
         </Form.Field>
         <Form.Field>
@@ -61,7 +72,7 @@ export default function Update() {
           type="submit"
           className="ui inverted purple button"
         >
-          Update
+          Guardar
         </Button>
       </Form>
     </div>

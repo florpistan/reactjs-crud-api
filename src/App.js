@@ -9,7 +9,7 @@ const App = () => {
   return (
     <Router>
       <div className="main">
-        <h2 className="main-header">React CRUD Operations </h2>
+        <h2 className="main-header">Alumnos - CRUD</h2>
         <div>
           <Route path="/create" exact>
             <Create />
