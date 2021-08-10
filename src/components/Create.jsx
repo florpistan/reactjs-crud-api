@@ -9,6 +9,7 @@ export default function Create() {
   const [lastName, setLastName] = useState('');
   const [comision, setComision] = useState('');
   const [checkbox, setCheckBox] = useState(false);
+  
   let history = useHistory();
 
   const postData = () => {
